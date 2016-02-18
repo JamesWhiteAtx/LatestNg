@@ -1,0 +1,16 @@
+﻿<div class="modal-header" cmp-html-content cg-url="modalVm.HeaderUrl" cg-content="modalVm.HeaderContent" cg-if="!modalVm.HideHeader">
+	<button type="button" class="close" ng-click="modalVm.Cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<h4 class="modal-title" cmp-html-content cg-url="modalVm.TitleUrl" cg-content="modalVm.TitleContent" cg-if="!modalVm.HideTitle">
+		<span>
+		<i class="fa fa-question-circle" ng-if="modalVm.ConfirmIcon"></i>
+		<i class="fa fa-info-circle" ng-if="modalVm.InfoIcon"></i>
+		&nbsp;{{modalVm.TitleText | translate}}</span>
+	</h4>
+</div>
+
+<div class="modal-body" ng-transclude></div>
+
+<div class="modal-footer" cmp-html-content cg-url="modalVm.FooterUrl" cg-content="modalVm.FooterContent" cg-if="!modalVm.HideFooter">
+	<button type="button" class="btn btn-primary" ng-if="!modalVm.HideOk" ng-click="modalVm.Ok()">{{modalVm.OkText | translate}}</button>
+	<button type="button" class="btn btn-default" ng-if="!modalVm.HideCancel" ng-click="modalVm.Cancel()">{{modalVm.CancelText | translate}}</button>
+</div>

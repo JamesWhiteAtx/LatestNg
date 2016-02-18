@@ -1,0 +1,28 @@
+﻿//  DEV REFERENCES ONLY - DO NOT LEAVE UNCOMMENTED
+/*@import "bootstrap/variables";
+@import "bootstrap/mixins/grid-framework";*/
+
+$screen-xxs-max: $screen-xs-min - 1;
+
+@media (max-width: $screen-xxs-max) {
+	@include make-grid(xxs);
+}
+
+// Generate the XXS columns
+@mixin make-xxs-column($columns, $gutter: $grid-gutter-width) {
+	position: relative;
+	min-height: 1px;
+	padding-left: ($gutter / 2);
+	padding-right: ($gutter / 2);
+
+	@media (max-width: $screen-xxs-max) {
+		float: left;
+		width: percentage(($columns / $grid-columns));
+	}
+}
+
+@media (max-width: $screen-xxs-max) {
+	.hidden-xxs {
+		display: none !important;
+	}
+}

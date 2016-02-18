@@ -1,0 +1,48 @@
+﻿<cmp-modal-template class="modal-find">
+
+	<div class="row search" ng-if="modalVm.ShowSearchBox">
+		<div>
+			<div class="input-group">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button"
+							title="{{'Core$Search' | translate}}"
+							ng-click="modalVm.Search()">
+						<span class="fa fa-search"></span>
+					</button>
+				</span>
+				<input type="text" class="form-control" placeholder="{{'Core$Search' | translate}}" ng-attr-autofocus="{{!modalVm.OnMobile ? 'autofocus' : undefined }}"
+					   ng-model="modalVm.FilterText" ng-model-options="{debounce: {default: 500, blur: 0} }" ng-change="modalVm.Filter()">
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row header hidden-xs">
+		<div ng-repeat="col in modalVm.RowDefinition.FieldDefns" class="col-sm-{{col.Width}}" ng-class="{'text-right': col.Right, 'text-center': col.Center}"
+			 ng-click="col.SortToggle()">
+			{{col.Title | translate}}
+			<i class="fa fa-fw" ng-class="{'fa-sort-asc': (col.Sort > 0), 'fa-sort-desc': (col.Sort < 0)}"></i>
+		</div>
+	</div>
+
+	<div class="rows">
+		<div class="row item"
+			 ng-repeat="row in modalVm.Rows | filter: { NotFound: '!true' } | orderBy: 'SortVal' : modalVm.ReverseSort "
+			 ng-class-odd="'odd'"
+			 ng-click="modalVm.PickRow(row)">
+
+			<div ng-repeat-start="col in row.Fields" class="visible-xs-block col-xxs-6 col-xs-4">
+				<label>{{col.Defn.Title | translate}}</label>
+			</div>
+
+			<div ng-repeat-end ng-class="{'text-right': col.Defn.Right, 'text-center': col.Defn.Center}"  class="col-xxs-6 col-xs-8 col-sm-{{col.Defn.Width}} cell">
+				<span ng-if="col.Defn.IsText">{{col.Display | translate}}</span>
+				<span ng-if="col.Defn.IsBool">
+					<span class="fa" ng-class="{'fa-check-square-o': col.Value, 'fa-square-o': !col.Value, }"></span>
+				</span>
+			</div>
+			
+		</div>
+	</div>
+
+</cmp-modal-template>
